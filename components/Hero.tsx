@@ -2,11 +2,9 @@ import {
   ArrowRight,
   BrainCircuit,
   Code2,
-  Cpu,
   ShieldCheck,
   Sparkles,
 } from "lucide-react";
-import HeroSceneLoader from "@/components/HeroSceneLoader";
 
 const notes = [
   "Custom Technology",
@@ -17,15 +15,15 @@ const notes = [
 const capabilities = [
   {
     icon: Code2,
-    label: "Software",
+    title: "Software",
   },
   {
     icon: BrainCircuit,
-    label: "AI & Automation",
+    title: "AI & Automation",
   },
   {
     icon: ShieldCheck,
-    label: "Cybersecurity",
+    title: "Cybersecurity",
   },
 ];
 
@@ -72,8 +70,8 @@ export default function Hero() {
           <div className="hero-visual">
             <div className="futurebyte-core">
               <div className="core-grid" />
-
               <div className="core-glow" />
+              <div className="core-scan" />
 
               <div className="core-header">
                 <div>
@@ -87,27 +85,41 @@ export default function Hero() {
                 </div>
               </div>
 
-              <div className="core-scene">
-                <HeroSceneLoader />
+              <div className="core-stage">
+                <div className="core-ring ring-one">
+                  <span className="node node-one" />
+                  <span className="node node-two" />
+                </div>
 
-                <div className="core-orbit-label label-software">
+                <div className="core-ring ring-two">
+                  <span className="node node-three" />
+                  <span className="node node-four" />
+                </div>
+
+                <div className="core-ring ring-three">
+                  <span className="node node-five" />
+                </div>
+
+                <div className="core-center">
+                  <div className="core-center-inner">
+                    <Sparkles size={19} />
+                    <span>F</span>
+                  </div>
+                </div>
+
+                <div className="core-label core-label-software">
                   <Code2 size={13} />
                   Software
                 </div>
 
-                <div className="core-orbit-label label-ai">
-                  <Sparkles size={13} />
+                <div className="core-label core-label-ai">
+                  <BrainCircuit size={13} />
                   AI
                 </div>
 
-                <div className="core-orbit-label label-security">
+                <div className="core-label core-label-security">
                   <ShieldCheck size={13} />
                   Security
-                </div>
-
-                <div className="core-center-badge">
-                  <div className="core-center-ring" />
-                  <span>F</span>
                 </div>
               </div>
 
@@ -116,12 +128,12 @@ export default function Hero() {
                   const Icon = item.icon;
 
                   return (
-                    <div key={item.label} className="core-capability">
+                    <div key={item.title} className="core-capability">
                       <span className="core-capability-icon">
                         <Icon size={14} />
                       </span>
 
-                      <span>{item.label}</span>
+                      <span>{item.title}</span>
                     </div>
                   );
                 })}
@@ -144,10 +156,10 @@ export default function Hero() {
                 </div>
               </div>
 
-              <div className="core-corner corner-top-left" />
-              <div className="core-corner corner-top-right" />
-              <div className="core-corner corner-bottom-left" />
-              <div className="core-corner corner-bottom-right" />
+              <span className="core-corner corner-top-left" />
+              <span className="core-corner corner-top-right" />
+              <span className="core-corner corner-bottom-left" />
+              <span className="core-corner corner-bottom-right" />
             </div>
           </div>
         </div>

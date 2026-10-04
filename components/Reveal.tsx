@@ -1,7 +1,12 @@
 "use client";
 
-import { motion } from "framer-motion";
-import type { ReactNode } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+  type ReactNode,
+} from "react";
 
 type RevealProps = {
   children: ReactNode;
@@ -15,32 +20,58 @@ export default function Reveal({
   children,
   className = "",
   delay = 0,
-  y = 28,
-  duration = 0.7,
+  y = 22,
+  duration = 0.5,
 }: RevealProps) {
+  const elementRef = useRef<HTMLDivElement | null>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const element = elementRef.current;
+
+    if (!element) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0];
+
+        if (!entry?.isIntersecting) {
+          return;
+        }
+
+        setVisible(true);
+        observer.unobserve(element);
+      },
+      {
+        threshold: 0.08,
+        rootMargin: "0px 0px -5% 0px",
+      }
+    );
+
+    observer.observe(element);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  const style = {
+    "--reveal-delay": `${delay}s`,
+    "--reveal-y": `${y}px`,
+    "--reveal-duration": `${duration}s`,
+  } as CSSProperties;
+
   return (
-    <motion.div
-      className={className}
-      initial={{
-        opacity: 0,
-        y,
-      }}
-      whileInView={{
-        opacity: 1,
-        y: 0,
-      }}
-      viewport={{
-        once: true,
-        amount: 0.12,
-        margin: "0px 0px -8% 0px",
-      }}
-      transition={{
-        duration,
-        delay,
-        ease: [0.16, 1, 0.3, 1],
-      }}
+    <div
+      ref={elementRef}
+      className={`${className} ${
+        visible ? "reveal-visible" : "reveal-hidden"
+      }`}
+      style={style}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }

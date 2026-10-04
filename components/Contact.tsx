@@ -1,9 +1,18 @@
 "use client";
 
-import { ArrowRight, Mail } from "lucide-react";
+import {
+  ArrowRight,
+  Mail,
+  MapPin,
+  MessageCircle,
+  Phone,
+} from "lucide-react";
 import Reveal from "@/components/Reveal";
 
 const CONTACT_EMAIL = "tharunsasanka0@outlook.com";
+const CONTACT_PHONE_DISPLAY = "071 563 1787";
+const CONTACT_PHONE_INTL = "+9471563787";
+const WHATSAPP_URL = "https://wa.me/9471563787";
 
 export default function Contact() {
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -63,21 +72,72 @@ export default function Contact() {
                 secure. We can shape the idea into a clear digital solution.
               </p>
 
-              <div className="contact-note">
-                <Mail size={16} className="text-cyan-400" />
+              <div className="contact-details">
+                <a
+                  href={`tel:${CONTACT_PHONE_INTL}`}
+                  className="contact-detail"
+                >
+                  <span className="contact-detail-icon">
+                    <Phone size={17} />
+                  </span>
 
-                <span>
-                  <span className="text-cyan-400">Email:</span>{" "}
-                  <a
-                    href={`mailto:${CONTACT_EMAIL}`}
-                    className="transition-colors hover:text-white"
-                  >
-                    {CONTACT_EMAIL}
-                  </a>
-                  <br />
-                  Project enquiries and business conversations are welcome.
-                </span>
+                  <span>
+                    <strong>Call</strong>
+                    <small>{CONTACT_PHONE_DISPLAY}</small>
+                  </span>
+                </a>
+
+                <a
+                  href={WHATSAPP_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="contact-detail"
+                >
+                  <span className="contact-detail-icon">
+                    <MessageCircle size={17} />
+                  </span>
+
+                  <span>
+                    <strong>WhatsApp</strong>
+                    <small>{CONTACT_PHONE_DISPLAY}</small>
+                  </span>
+                </a>
+
+                <a
+                  href={`mailto:${CONTACT_EMAIL}`}
+                  className="contact-detail"
+                >
+                  <span className="contact-detail-icon">
+                    <Mail size={17} />
+                  </span>
+
+                  <span>
+                    <strong>Email</strong>
+                    <small>{CONTACT_EMAIL}</small>
+                  </span>
+                </a>
+
+                <div className="contact-detail">
+                  <span className="contact-detail-icon">
+                    <MapPin size={17} />
+                  </span>
+
+                  <span>
+                    <strong>Location</strong>
+                    <small>Bulathsinhala, Sri Lanka</small>
+                  </span>
+                </div>
               </div>
+
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noreferrer"
+                className="button-whatsapp"
+              >
+                <MessageCircle size={18} />
+                Chat On WhatsApp
+              </a>
             </div>
           </Reveal>
 
